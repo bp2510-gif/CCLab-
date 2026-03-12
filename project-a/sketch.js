@@ -4,6 +4,8 @@ let bgR, bgG, bgB;
 let brush;
 let mouseReleased;
 
+let clickColor; //Jessie
+
 let creatureX;
 let creatureY;
 let creatureTargetX;
@@ -17,6 +19,8 @@ function setup() {
     canvas.parent("p5-canvas-container");
     colorMode(HSB);
 
+    clickColor = color(random(360), 80, 100);
+
     bgR = random(0, 255);
     bgG = random(0, 255);
     bgB = random(0, 255);
@@ -29,21 +33,25 @@ function setup() {
     creatureTargetY = height / 2;
 }
 
+function mousePressed() {
+    clickColor = color(random(360), 80, 100);
+} //Jessie
+
 function draw() {
     background(bgR, bgG, bgB);
 
     drawCreature(creatureX, creatureY);
 
-    creatureX = lerp(creatureX, creatureTargetX, 0.01);
-    creatureY = lerp(creatureY, creatureTargetY, 0.01);
+    creatureX = lerp(creatureX, creatureTargetX, 0.06);
+    creatureY = lerp(creatureY, creatureTargetY, 0.06);
 
     if (frameCount % 80 == 79) {
-        creatureTargetX = random(width * 0.2, width * 0.8);
-        creatureTargetY = random(height * 0.2, height * 0.8);
+        creatureTargetX = random(width * 0.1, width * 0.7);
+        creatureTargetY = random(height * 0.1, height * 0.7);
     }
 
-    textSize(brush);
-    text("🎨", 70, 450);
+    textSize(125);
+    text("🎨", 50, 450);
     if (mouseIsPressed == true) {
         colorMode(RGB);
         let c = get(mouseX, mouseY);
@@ -88,7 +96,7 @@ function drawCreature(cx, cy) {
     let cellY = map(noise(frameCount * 0.005), 0, 1, -120, 120);
     ellipse(cellX, cellY, 50, 90);
 
-    // triangle
+    // rectangle
 
     if (mouseIsPressed === true) {
         fill("rgb(169,73,190)");
@@ -98,9 +106,11 @@ function drawCreature(cx, cy) {
         strokeWeight(1);
     }
     rect(-100, 40, 40, 50, map(sin(frameCount / 30 + 10), -1, 1, 0, 20));
-
+    // triangle
     if (mouseIsPressed === true) {
         fill("brown");
+
+        stroke("#FD00FF");
     } else {
         fill("#233FDDEA");
         stroke("rgb(180,206,25)");
@@ -122,9 +132,15 @@ function drawCreature(cx, cy) {
     circle(cellX, cellY, 40);
 
     // square
-    fill("rgb(236,0,160)");
-    stroke("#FD1100");
-    strokeWeight(4);
+
+    if (mouseIsPressed === true) {
+        fill("rgb(33,0,236)");
+        stroke("#FFEB3B");
+    } else {
+        fill("rgb(236,0,160)");
+        stroke("#FD1100");
+        strokeWeight(4);
+    }
     rect(-150, -100, map(sin(frameCount / 40 + 1), -1, 1, 0, 50));
 
     // moving line triangle
@@ -149,9 +165,22 @@ function drawCreature(cx, cy) {
     rect(0, 0, 100, 50, map(sin(frameCount / 40 + 3), -1, 1, 0, 50));
 
     // circle within a circle
-    fill("rgb(167,53,255)");
-    strokeWeight(6);
-    stroke("rgb(250,163,178)");
+
+
+    if (mouseIsPressed === true) {
+        fill("#9E9E9E");
+        strokeWeight(6);
+        stroke("#2196F3");
+    } else {
+        fill("rgb(167,53,255)");
+        strokeWeight(6);
+        stroke("rgb(250,163,178)");
+    }
+
+
+
+
+
     circle(-150, 0, map(sin(frameCount / 40 + 4), -1, 1, 0, 50));
 
     // triangle
@@ -174,10 +203,23 @@ function drawCreature(cx, cy) {
     circle(-150, 0, map(sin(frameCount / 40 + 4), -1, 1, 0, 20));
 
     // big pulsing circle
-    fill("rgb(255,5,195)");
-    strokeWeight(20);
-    stroke("#FF980072");
+    if (mouseIsPressed === true) {
+        fill("#009688");
+        strokeWeight(20);
+        stroke("#FFEB3B66");
+    } else {
+        fill("rgb(255,5,195)");
+        strokeWeight(20);
+        stroke("#FF980072");
+    }
+
     circle(100, -100, map(sin(frameCount / 20 + 4), -1, 1, 0, 70));
+
+    //triangle
+    fill("#FFE501AF");
+    strokeWeight(20);
+    stroke("#FF3D00");
+    circle(50, -50, map(sin(frameCount / 10), -1, 1, 0, 6));
 
     // polygon
     fill("rgb(249,149,255))");
@@ -238,7 +280,7 @@ function drawPetalMembrane(x, y) {
     }
 
     if (mouseIsPressed === true) {
-        fill("#FFC107");
+        fill(clickColor); //Jessie
     } else {
         fill("rgba(255,255,255,0.55)");
         stroke("#E380EE");
@@ -296,3 +338,5 @@ function drawFurOnPetalMembrane(x, y) {
     }
     pop();
 }
+
+console.log(b);
