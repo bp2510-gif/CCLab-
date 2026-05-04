@@ -37,6 +37,13 @@ let send;
 
 let transitionTimer = 0;
 
+let found1,
+  found2,
+  found3,
+  found4,
+  found5 = false;
+
+
 function preload() {
   sound = loadSound("assets/Glitter.mp3");
 
@@ -521,11 +528,6 @@ function shareMessageViaMqtt(index, message) {
 // what conditions i can make to transition from screen 1.5 to 2 --> after they find all 5 cards
 
 //Candy:add checking boolean variable and make them true one the card is found. I added in the code below already
-let found1,
-  found2,
-  found3,
-  found4,
-  found5 = false;
 
 // card one by one conditions
 
