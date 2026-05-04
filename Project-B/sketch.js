@@ -413,19 +413,13 @@ class Button {
       fill(this.col);
       text(this.txt, this.x, this.y, 150);
 
-      // if(this.size >5){
-      //   this.size = this.size -5;
-      // }
-      // image(card1, this.x, this.y, this.size, this.size * 1.6);
+
     } else {
-      // noStroke();
-      // fill(this.col);
-      // square(this.x, this.y, this.size);
-      // this.size =90;
+
 
       image(this.cardChoice, this.x, this.y, this.size, 144);
     }
-    // image(card1, this.x, this.y, this.size, this.size * 1.6);
+
   }
   update() {
     this.checkMouseCursor();
